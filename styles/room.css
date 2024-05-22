@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 .container {
   margin-top: 74px;
   height: clac(100vh - 74px);
@@ -38,7 +41,7 @@
   position: fixed;
   font-size: 18px;
   background-color: #323143;
-  width: 218px;
+  width: 240px;
 }
 
 #member__list {
@@ -68,7 +71,7 @@
   background-color: #2aca3e;
 }
 
-.member_name{
+.member_name {
   font-size: 14px;
   line-height: 0;
 }
@@ -113,23 +116,20 @@
   color: #ede0e0;
 }
 
-.message__body__bot{
+.message__body__bot {
   padding: 0 20px;
   max-width: 900px;
   color: #bdbdbd;
 }
 
-
 .message__author {
   margin-right: 10px;
-  color: #2aca3e!important;
-
+  color: #2aca3e !important;
 }
 
 .message__author__bot {
   margin-right: 10px;
-  color: #a52aca!important;
-
+  color: #2b7ef1 !important;
 }
 
 .message__text {
@@ -168,11 +168,10 @@
   justify-self: center;
   position: fixed;
   left: 15.7rem;
- 
+
   width: calc(100% - 40.7rem);
   overflow-y: auto;
   height: 100%;
-  
 }
 
 .highlighted_stream {
@@ -188,36 +187,45 @@
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 200px;
-
 }
 
 .container__1 {
-  background-color: #3f434a;
-  border: 2px solid violet;
+ 
+  border: 2px solid #2b7ef1;
   border-radius: 50%;
-  height: 100px;
   width: 100px;
+  height: 100px;
   overflow: hidden;
-
+  
 }
 .video {
+ 
   width: 100%;
   height: 100%;
-  
   overflow: hidden;
+  
+  
+
+  
+}
+
+.container__1 .name {
+  text-align: center;
 }
 
 .displayFrame {
   border-radius: 0;
+  border: 0;
   width: 100%;
   height: 100%;
-  overflow: visible;
-}
-
-.highlighted_stream {
   
 }
 
+.highlighted_stream {
+  height: 400px;
+  width: 100%;
+ overflow: hidden;
+}
 
 @media (max-width: 1200px) {
   #members__container {
@@ -233,8 +241,6 @@
     left: 0;
   }
 }
- 
-
 
 @media (max-width: 980px) {
   #stream__container {
@@ -315,9 +321,13 @@
 .stream__actions button.active,
 .stream__actions a:hover,
 .stream__actions button:hover {
-  background-color: #845695;
+  background-color: #2b7ef1;
 }
 
 .streamActions {
-  background-color: #845695;
+  background-color: #2b7ef1;
+}
+
+.user-message {
+  justify-content: right;
 }

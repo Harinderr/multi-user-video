@@ -33,8 +33,9 @@ chatButton.addEventListener('click', () => {
 
 
 const stream = document.querySelector('.highlighted_stream')
-const videoBox = document.getElementsByClassName('container__1')
+const videoBox = document.getElementsByClassName('video')
 const allUsers = document.querySelector('.Otherusers')
+
 
  function mainStream (e) {
   
@@ -45,10 +46,13 @@ const allUsers = document.querySelector('.Otherusers')
     allUsers.appendChild(Existingstream)
     
   }
-  let clickedItem = e.currentTarget
+  else {
+    let clickedItem = e.currentTarget
+    
+    stream.style.display = 'block'
   clickedItem.classList.add('displayFrame')
-  stream.style.display = 'block'
   stream.appendChild(clickedItem)
+}
   
 
   
@@ -58,14 +62,14 @@ for(let i = 0;  i < videoBox.length; i++) {
   videoBox[i].addEventListener('click', mainStream)
 }
 
-let hideStream = async () => {
-  let streamContainer = document.querySelector('.highlighted_stream')
-  let allusers = document.querySelector('.Otherusers')
-  let actualSize = streamContainer.children[0]
-  actualSize.classList.remove('displayFrame')
-  allusers.appendChild(actualSize)         
+let hideStream = () => {
+
+  let data = stream.children[0]
+  if(data)  {
+    data.classList.remove('displayFrame')
+  data.appendChild(actualSize)         
  
-    streamContainer.style.display = 'none'
+    stream.style.display = 'none'}
   
   
 

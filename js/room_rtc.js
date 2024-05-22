@@ -51,7 +51,7 @@ let  joinStream = async () => {
 localTracks = await AgoraRTC.createMicrophoneAndCameraTracks()
 let user = `<div class="container__1" id="userBox-${uid}">
             <div class="video" id='user-${uid}'></div>
-            <div class='name' > ${username}</div>
+            <div class='name'> ${username}</div>
                 </div>`
 
 
@@ -66,18 +66,15 @@ await client.publish([localTracks[0], localTracks[1]])
 
 
 const SwitchToCamera = async () => { 
-     let user = `<div class="container__1" id="userBox-${uid}">
+     let user = `<div class="container__1 displayFrame" id="userBox-${uid}">
 <div class="video" id='user-${uid}'></div>
     </div>`
     document.querySelector('.highlighted_stream').insertAdjacentHTML('beforeend',user)
     document.querySelector('#screen').classList.remove('active')
     document.querySelector(`#userBox-${uid}`).addEventListener('click', mainStream)
-    // document.querySelector(`#userBox-${uid}`).style = 'width: 100%, height:100%'
-  
-  await  localTracks[0].setMuted(true)
-   await localTracks[1].setMuted(true)
-    document.querySelector('#camera').classList.remove('active')
-document.querySelector('#mic').classList.remove('active')
+    
+    document.querySelector('#camera').classList.add('active')
+document.querySelector('#mic').classList.add('active')
     localTracks[1].play(`user-${uid}`)
     await client.publish([localTracks[1]])
 }
@@ -167,23 +164,29 @@ document.querySelector('#mic').addEventListener('click', toggleMic)
 
 let getRemoteTracks = async (user,mediatype) => {
   remoteTracks[user.uid] = user
-
+ console.log(remoteTracks)
      await client.subscribe(user,mediatype)
+       // Iterate over existing users and subscribe to their tracks for the new user
+    for (let existingUser of Object.values(remoteTracks)) {
+        if (existingUser.uid !== user.uid) {
+            await client.subscribe(existingUser, mediatype);
+        }
+    }
   
     let remoteUser = document.getElementById(`user-${user.uid}`)
     if(remoteUser === null){
         remoteUser = `<div class="container__1" id="userBox-${user.uid}">
         <div class="video" id='user-${user.uid}'></div>
-        <div class='name' > ${username}</div>
+        
             </div>`
 
             document.querySelector('.Otherusers').insertAdjacentHTML('beforeend',remoteUser)
             document.getElementById(`userBox-${user.uid}`).addEventListener('click', mainStream)
         }
-    if(mediatype === 'video'){
+    if(mediatype === 'video' && user.videoTrack){
          user.videoTrack.play(`user-${user.uid}`)
     }
-    if(mediatype === 'audio'){
+    if(mediatype === 'audio' && user.audioTrack){
         user.audioTrack.play()
     }
 

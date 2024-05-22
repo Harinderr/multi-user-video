@@ -1,3 +1,5 @@
+
+
 const handleMemberJoined = async (MemberId) => {
     // console.log('a new member joined ' + MemberId )
         addMemberToDom(MemberId)
@@ -76,6 +78,16 @@ const chatMessage = async (e) => {
 
 const addMessageToDom = async (name,message) => {
     let messagesContainer = document.getElementById('messages')
+    if(name == username){
+        let msgWrapper = `<div class="message__wrapper user-message">
+        <div class="message__body">
+            <strong class="message__author">${name}</strong>
+            <p class="message__text">${message}</p>
+        </div>
+    </div>` 
+    messagesContainer.insertAdjacentHTML("beforeend", msgWrapper)
+
+    } else {
         let msgWrapper = `<div class="message__wrapper">
         <div class="message__body">
             <strong class="message__author">${name}</strong>
@@ -83,13 +95,16 @@ const addMessageToDom = async (name,message) => {
         </div>
     </div>`
     messagesContainer.insertAdjacentHTML("beforeend", msgWrapper)
+
+    }
+       
     messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 const addBotMessageToDom = async (botMessage) => {
     let messagesContainer = document.getElementById('messages')
         let msgWrapper = `<div class="message__wrapper">
         <div class="message__body__bot">
-            <strong class="message__author__bot">🤖 Mumble Bot</strong>
+            <strong class="message__author__bot">Welcome Meet</strong>
             <p class="message__text__bot"> ${botMessage}</p>
         </div>
     </div>`
